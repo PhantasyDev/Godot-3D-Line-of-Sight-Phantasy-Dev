@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://NPC.tscn" type="PackedScene" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 20, 20 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.454902, 0.454902, 0.454902, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 4, 4, 4 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.454902, 0.329412, 0.0823529, 1 )
+
+[sub_resource type="Environment" id=5]
+ssao_enabled = true
+ssao_quality = 2
+
+[node name="World" type="Spatial"]
+
+[node name="Floor" type="CSGMesh" parent="."]
+use_collision = true
+mesh = SubResource( 1 )
+material = SubResource( 3 )
+
+[node name="Wall" type="CSGMesh" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.21715, 1.96981, 0 )
+use_collision = true
+mesh = SubResource( 2 )
+material = SubResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.10877, 1.62554, 0 )
+
+[node name="NPC" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17, 2, 0.0481148 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.482963, 0.642402, -0.595035, -0.12941, 0.724444, 0.677077, 0.866025, -0.25, 0.433013, -19, 0, 37 )
+shadow_enabled = true
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.965926, -0.12941, 0.224144, -1.49012e-08, 0.866025, 0.5, -0.258819, -0.482963, 0.836516, 8, 11, 17 )
